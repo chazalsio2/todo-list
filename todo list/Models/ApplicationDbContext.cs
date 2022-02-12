@@ -11,7 +11,7 @@ namespace todo_list.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data source = C:\Users\Lenovo\source\repos\todo list\todo list\DB\DbToDoListe.db");
+            optionsBuilder.UseSqlite(@"Data source = C:\Users\user\Source\Repos\chazalsio2\todo-list\todo list\DB\DbToDoListe.db");
         }
         public DbSet<List> Lists { get; set; }
         public object List { get; internal set; }

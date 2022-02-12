@@ -30,6 +30,17 @@ namespace todo_list.ControlleurList
             data.Date = list.Date;
             data.Description = list.Description;
             data.Tache = list.Tache;
+            data.completed = list.completed;    
+            return _dbContext.SaveChanges() > 0;
+        }
+        public bool UpdateCompleted(List list)
+        {
+            var data = _dbContext.Lists.FirstOrDefault(c => c.Id == list.Id);
+            if (data == null)
+            {
+                return false;
+            }
+            data.completed = list.completed;    
             return _dbContext.SaveChanges() > 0;
         }
         public bool Delete(int id)

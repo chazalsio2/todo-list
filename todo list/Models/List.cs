@@ -14,5 +14,6 @@ namespace todo_list.Models
         public string Description { get; set; }
         public string Tache { get; set; }
         public DateTime Date { get; set; }
+        public int completed { get; set; } 
     }
 }
