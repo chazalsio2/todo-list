@@ -174,35 +174,27 @@ namespace todo_list
         }
         private void button1_Click(object sender, EventArgs e)
         {
-                DataGridViewRow dr = dataGridView1.SelectedRows[0];
-               
-                    List list = new List();
-                    bool isChecked = Convert.ToBoolean(dr.Cells["Terminer"].Value);
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                bool isChecked = Convert.ToBoolean(dr.Cells["Terminer"].Value);
+                List list = new List();
+                list.Id = Convert.ToInt32(dr.Cells["Id"].Value);
+                list.Tache = Convert.ToString(dr.Cells["Tache"].Value);
+                list.Date = Convert.ToDateTime(dr.Cells["Echéance"].Value);
+                list.Description = Convert.ToString((string)dr.Cells["Description"].Value);
+                if (isChecked)
+                {
+                    list.completed = 1;
+                    _dbContext.Update(list);
+                }
+                else
+                {
+                    list.completed = 0;
+                    _dbContext.Update(list);
+                }
 
-                 
-                    
-                        
-                        if (isChecked == true)
-                        {
-                            list.Id = (int)dr.Cells["Id"].Value;
-                            list.Tache = (string)dr.Cells["Tache"].Value;
-                            list.Date = (DateTime)dr.Cells["Echéance"].Value;
-                            list.Description = (string)dr.Cells["Description"].Value;
-                            list.completed = 1;
-                            _dbContext.Update(list);
-                            // MessageBox.Show("Tache : " + list.Tache + " modifier");
-
-                        }
-                        if (isChecked == false)
-                        {
-                            list.Id = (int)dr.Cells["Id"].Value;
-                            list.Tache = (string)dr.Cells["Tache"].Value;
-                            list.Date = (DateTime)dr.Cells["Echéance"].Value;
-                            list.Description = (string)dr.Cells["Description"].Value;
-                            list.completed = 0;
-                            _dbContext.Update(list);
-                        }
-                LoadApp();
+            }
+            LoadApp();
             }
         }
     }
